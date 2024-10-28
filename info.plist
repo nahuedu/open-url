@@ -60,7 +60,7 @@
 				<key>runningsubtext</key>
 				<string>Loading...</string>
 				<key>script</key>
-				<string>python3 main.py $1</string>
+				<string>python3 main.py $1 $browser $limit</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -128,7 +128,7 @@
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>snp</string>
+				<string>u</string>
 				<key>placeholder</key>
 				<string>Keyword</string>
 				<key>required</key>
@@ -145,9 +145,58 @@
 			<key>variable</key>
 			<string>keyword</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>chrome</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Google Chrome</string>
+						<string>chrome</string>
+					</array>
+					<array>
+						<string>Orion</string>
+						<string>orion</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Browser</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>browser</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>defaultvalue</key>
+				<integer>10</integer>
+				<key>markercount</key>
+				<integer>11</integer>
+				<key>maxvalue</key>
+				<integer>15</integer>
+				<key>minvalue</key>
+				<integer>5</integer>
+				<key>onlystoponmarkers</key>
+				<true/>
+				<key>showmarkers</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Limit</string>
+			<key>type</key>
+			<string>slider</string>
+			<key>variable</key>
+			<string>limit</string>
+		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>

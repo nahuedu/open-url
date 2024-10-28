@@ -10,23 +10,24 @@ bmDir = Path(
     "~/Library/Application Support/Orion/Defaults/favourites.plist"
 ).expanduser()
 
-size = 10
-browser = "orion"
+
+def main(browser, search, size):
+    records = execute_query(browser, search, size)
+    print(json.dumps(output(records), ensure_ascii=False))
 
 
-def main():
-    search = argv[1]
-    browser = argv[2]
+def debug_query(browser, search, size):
+    print(json.dumps(execute_query(browser, search, size), ensure_ascii=False))
 
+
+def execute_query(browser, search, size):
     finder = get_finder(browser)
 
     con = sqlite3.connect(finder.dir)
     cur = con.cursor()
 
     cur.execute(finder.query(search, size), params(finder.words(search)))
-    records = cur.fetchall()
-
-    print(json.dumps(output(records), ensure_ascii=False))
+    return cur.fetchall()
 
 
 def get_finder(browser):
@@ -54,11 +55,16 @@ def output(records):
 
 
 def elem(record):
-    title = record[2]
+    title = record[0]
     url = record[1]
 
     return {"title": title, "subtitle": url, "arg": url}
 
 
 if __name__ == "__main__":
-    main()
+    size_most_visited = argv[3]
+    browser = argv[2]
+    search = argv[1]
+    size_recents = 3
+
+    main(browser, search, size_most_visited)

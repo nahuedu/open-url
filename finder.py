@@ -6,8 +6,8 @@ class Finder:
         self.dir = ""
 
     def query(self, search, size):
-        select = "select *"
-        fm = f"from {self.fm()}"
+        select = f"select {self.title_column()}, {self.url_column()}"
+        fm = f"from {self.table()}"
         where = f"where ({self.filters(self.words(search))})"
         order = f"order by {self.order_column()} desc"
         limit = f"limit {size}"
@@ -37,8 +37,17 @@ class Finder:
     def host_column(self) -> str:
         return ""
 
-    def fm(self) -> str:
+    def table(self) -> str:
         return ""
+
+    def url_column(self) -> str:
+        return ""
+
+    def get_url(self, record):
+        return record[1]
+
+    def get_title(self, record):
+        return record[0]
 
 
 class Orion(Finder):
@@ -56,15 +65,18 @@ class Orion(Finder):
     def order_column(self):
         return "visit_count"
 
-    def fm(self):
+    def table(self):
         return "history_items"
+
+    def url_column(self):
+        return "url"
 
 
 class Chrome(Finder):
     def __init__(self):
         self.dir = str(
             Path(
-                "~/Library/Application Support/Google Chrome/Defaults/History"
+                "~/Library/Application Support/Google/Chrome/Default/History"
             ).expanduser()
         )
 
@@ -77,5 +89,8 @@ class Chrome(Finder):
     def order_column(self):
         return "visit_count"
 
-    def fm(self):
-        return "visits v join urls u on v.url = u.id"
+    def table(self):
+        return "urls"
+
+    def url_column(self):
+        return "url"
