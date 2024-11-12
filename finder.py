@@ -52,9 +52,8 @@ class Finder:
 
 class Orion(Finder):
     def __init__(self):
-        self.dir = str(
-            Path("~/Library/Application Support/Orion/Defaults/history").expanduser()
-        )
+        self.dir = Path("~/Library/Application Support/Orion/Defaults/history").expanduser()
+
 
     def title_column(self):
         return "title"
@@ -73,12 +72,9 @@ class Orion(Finder):
 
 
 class Chrome(Finder):
-    def __init__(self):
-        self.dir = str(
-            Path(
-                "~/Library/Application Support/Google/Chrome/Default/History"
-            ).expanduser()
-        )
+    def __init__(self, profile_dir):
+        self.dir = Path(f"~/Library/Application Support/Google/Chrome/{profile_dir}/History").expanduser()
+
 
     def title_column(self):
         return "title"

@@ -35,6 +35,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1B35BFFC-F85E-4986-B47C-1477A39A9E49</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -60,7 +81,7 @@
 				<key>runningsubtext</key>
 				<string>Loading...</string>
 				<key>script</key>
-				<string>python3 main.py $1 $browser $limit</string>
+				<string>python3 main.py $1 $browser $limit $chrome_dir</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -80,27 +101,6 @@
 			<string>069F99B8-A0D9-48E3-9533-C5E14840F874</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>1B35BFFC-F85E-4986-B47C-1477A39A9E49</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -177,11 +177,11 @@
 				<key>defaultvalue</key>
 				<integer>10</integer>
 				<key>markercount</key>
-				<integer>11</integer>
+				<integer>9</integer>
 				<key>maxvalue</key>
-				<integer>15</integer>
+				<integer>9</integer>
 				<key>minvalue</key>
-				<integer>5</integer>
+				<integer>1</integer>
 				<key>onlystoponmarkers</key>
 				<true/>
 				<key>showmarkers</key>
@@ -195,6 +195,27 @@
 			<string>slider</string>
 			<key>variable</key>
 			<string>limit</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>Default</string>
+				<key>placeholder</key>
+				<string>Default</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Chrome profile directory.</string>
+			<key>label</key>
+			<string>Directory</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>chrome_dir</string>
 		</dict>
 	</array>
 	<key>version</key>

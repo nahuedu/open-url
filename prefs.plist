@@ -4,5 +4,7 @@
 <dict>
 	<key>browser</key>
 	<string>orion</string>
+	<key>limit</key>
+	<integer>3</integer>
 </dict>
 </plist>
