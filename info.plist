@@ -5,7 +5,7 @@
 	<key>bundleid</key>
 	<string>nahuedu.open-url</string>
 	<key>category</key>
-	<string>Internet</string>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>069F99B8-A0D9-48E3-9533-C5E14840F874</key>
@@ -25,11 +25,11 @@
 	<key>createdby</key>
 	<string>nahuedu</string>
 	<key>description</key>
-	<string>url</string>
+	<string>Quickly open the URL you are looking for</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>url</string>
+	<string>open-url</string>
 	<key>objects</key>
 	<array>
 		<dict>

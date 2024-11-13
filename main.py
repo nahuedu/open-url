@@ -62,7 +62,14 @@ def elem(record):
     title = record[0]
     url = record[1]
 
-    return {"title": title, "subtitle": url, "arg": url}
+    return {
+        "title": title,
+        "subtitle": url,
+        "arg": url,
+        "icon": {
+            "path": "img/logo.png"
+        }
+    }
 
 
 if __name__ == "__main__":
