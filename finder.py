@@ -5,14 +5,24 @@ class Finder:
     def __init__(self):
         self.dir = ""
 
-    def query(self, search, size):
+    def query_top_visited(self, search, size):
+        order = f"order by {self.order_column_top_visited()} desc"
+
+        return self.query(search, size, order)
+
+    def query_recents(self, search, size):
+        order = f"order by {self.order_column_recents()} desc"
+
+        return self.query(search, size, order)
+
+    def query(self, search, size, order):
         select = f"select {self.title_column()}, {self.url_column()}"
         fm = f"from {self.table()}"
         where = f"where ({self.filters(self.words(search))})"
-        order = f"order by {self.order_column()} desc"
         limit = f"limit {size}"
 
         return " ".join([select, fm, where, order, limit])
+
 
     def filters(self, words):
         title_filter = self.filter_block(words, "and", self.title_column())
@@ -28,7 +38,10 @@ class Finder:
     def words(self, search):
         return list(map(lambda w: f"%{w}%", search.split()))
 
-    def order_column(self) -> str:
+    def order_column_recents(self) -> str:
+        return ""
+
+    def order_column_top_visited(self) -> str:
         return ""
 
     def title_column(self) -> str:
@@ -61,7 +74,10 @@ class Orion(Finder):
     def host_column(self):
         return "host"
 
-    def order_column(self):
+    def order_column_top_visited(self):
+        return "visit_count"
+
+    def order_column_recents(self):
         return "visit_count"
 
     def table(self):
@@ -82,7 +98,10 @@ class Chrome(Finder):
     def host_column(self):
         return "url"
 
-    def order_column(self):
+    def order_column_recents(self):
+        return "visit_count"
+
+    def order_column_top_visited(self):
         return "visit_count"
 
     def table(self):
