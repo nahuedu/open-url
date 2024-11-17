@@ -39,13 +39,13 @@ class Finder:
         return list(map(lambda w: f"%{w}%", search.split()))
 
     def order_column_recents(self) -> str:
-        return ""
+        return "last_visit_time"
 
     def order_column_top_visited(self) -> str:
-        return ""
+        return "visit_count"
 
     def title_column(self) -> str:
-        return ""
+        return "title"
 
     def host_column(self) -> str:
         return ""
@@ -54,7 +54,7 @@ class Finder:
         return ""
 
     def url_column(self) -> str:
-        return ""
+        return "url"
 
     def get_url(self, record):
         return record[1]
@@ -67,24 +67,11 @@ class Orion(Finder):
     def __init__(self):
         self.dir = Path("~/Library/Application Support/Orion/Defaults/history").expanduser()
 
-
-    def title_column(self):
-        return "title"
-
     def host_column(self):
         return "host"
 
-    def order_column_top_visited(self):
-        return "visit_count"
-
-    def order_column_recents(self):
-        return "visit_count"
-
     def table(self):
         return "history_items"
-
-    def url_column(self):
-        return "url"
 
 
 class Chrome(Finder):
@@ -92,20 +79,8 @@ class Chrome(Finder):
         self.dir = Path(f"~/Library/Application Support/Google/Chrome/{profile_dir}/History").expanduser()
 
 
-    def title_column(self):
-        return "title"
-
     def host_column(self):
         return "url"
 
-    def order_column_recents(self):
-        return "visit_count"
-
-    def order_column_top_visited(self):
-        return "visit_count"
-
     def table(self):
         return "urls"
-
-    def url_column(self):
-        return "url"
