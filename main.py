@@ -25,10 +25,28 @@ def execute_query(browser, search, size_top_visited, chrome_dir, size_recents):
     shutil.copyfile(finder.dir, data_path, follow_symlinks=False)
 
     with sqlite3.connect(data_path) as con:
+        con.row_factory = dict_factory
         cur = con.cursor()
 
-        return step.MostVisitedStep().process(cur, finder, search, size_top_visited) + step.RecentsStep().process(cur, finder, search, size_recents)
+        return step.MostVisitedStep(finder).process(cur, search, size_top_visited) + step.RecentsStep(finder).process(cur, search, size_recents)
 
+def debug(search):
+    finder = get_finder('orion', None)
+
+    data_path = 'data/hist'
+    shutil.copyfile(finder.dir, data_path, follow_symlinks=False)
+
+    with sqlite3.connect(data_path) as con:
+        con.row_factory = dict_factory
+        cur = con.cursor()
+        st = step.MostVisitedStep(finder)
+
+        cur.execute(st.get_query(search, 3), st.params(search))
+        return cur.fetchall()
+
+def dict_factory(cursor, row):
+    fields = [column[0].lower() for column in cursor.description]
+    return {key: value for key, value in zip(fields, row)}
 
 
 def get_finder(browser, chrome_dir):

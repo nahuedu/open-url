@@ -1,9 +1,11 @@
 
 class Step:
+    def __init__(self, finder):
+        self.finder = finder
 
     def elem(self, record):
-        title = record[0]
-        url = record[1]
+        title = record[self.finder.title_column()]
+        url = record[self.finder.url_column()]
 
         return {
             "title": title,
@@ -17,31 +19,36 @@ class Step:
     def subtitle(self, url):
         return ""
 
-    def params(self, words):
+    def params(self, search):
+        words = self.finder.words(search)
         return tuple(words) + tuple(words)
 
-    def get_query(self, finder, search, size):
+    def get_query(self, search, size):
         return ""
 
-    def process(self, cursor, finder, search, size):
-        cursor.execute(self.get_query(finder, search, size), self.params(finder.words(search)))
+    def process(self, cursor, search, size):
+        cursor.execute(self.get_query(search, size), self.params(search))
         records = cursor.fetchall()
         return list(map(self.elem, records))
 
 
 class RecentsStep(Step):
+    def __init__(self, finder):
+        self.finder = finder
 
-    def get_query(self, finder, search, size):
-        return finder.query_recents(search, size);
+    def get_query(self, search, size):
+        return self.finder.query_recents(search, size);
 
     def subtitle(self, url):
         return "Recents — " + url
 
 
 class MostVisitedStep(Step):
+    def __init__(self, finder):
+        self.finder = finder
 
-    def get_query(self, finder, search, size):
-        return finder.query_top_visited(search, size);
+    def get_query(self, search, size):
+        return self.finder.query_top_visited(search, size);
 
     def subtitle(self, url):
         return "Top visited — " + url

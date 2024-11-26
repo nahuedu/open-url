@@ -16,7 +16,7 @@ class Finder:
         return self.query(search, size, order)
 
     def query(self, search, size, order):
-        select = f"select {self.title_column()}, {self.url_column()}"
+        select = f"select *"
         fm = f"from {self.table()}"
         where = f"where ({self.filters(self.words(search))})"
         limit = f"limit {size}"
@@ -55,12 +55,6 @@ class Finder:
 
     def url_column(self) -> str:
         return "url"
-
-    def get_url(self, record):
-        return record[1]
-
-    def get_title(self, record):
-        return record[0]
 
 
 class Orion(Finder):
